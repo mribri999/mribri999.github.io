@@ -1,1 +1,110 @@
-Spintuition MRI is new
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spintuition — Interactive 3D MRI Spin Dynamics</title>
+  <meta name="description" content="Spintuition is an iOS app for interactive, intuitive 3D visualization of MRI spin dynamics for teaching, learning and interpretation.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="index.html"><img src="img/spinicon.png" alt="">Spintuition</a>
+      <nav>
+        <a class="active" href="index.html">Home</a>
+        <a href="examples.html">Examples</a>
+        <a href="direct-control.html">Direct Control</a>
+        <a href="vector-array.html">Vector Array</a>
+        <a href="sequence-panel.html">Sequence Panel</a>
+        <a href="pulseq.html">Pulseq</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Spintuition</h1>
+    <p class="lead">Interactive, intuitive 3D graphical representations of MRI spin dynamics to aid in
+      teaching, learning and interpretation.</p>
+
+    <img class="hero-img" src="img/header.jpg" alt="Spintuition welcome screen, Full View with spins and waveforms, and expanded spin view">
+
+    <p>Beginning with a quick tour and basic examples, you can advance to view RF and gradient
+      waveforms, directly control RF/gradients, or directly manipulate the spins themselves for
+      illustration. Spins are rendered as 3D vectors, and Pulseq sequences (<code>.seq</code>) can
+      be loaded and displayed for compatibility with other tools.</p>
+
+    <h2>Highlights</h2>
+    <div class="cards">
+      <div class="card">
+        <h3><a href="examples.html">Guided examples</a></h3>
+        <p>A built-in series walks from polarization and precession through gradients, encoding,
+          selective excitation, spin echoes, and on to EPI, spiral, CPMG and bSSFP.</p>
+      </div>
+      <div class="card">
+        <h3><a href="direct-control.html">Direct control</a></h3>
+        <p>Set spin angles and k-space phase directly, apply relaxation, off-resonance, diffusion
+          and 180° pulses — a quick way to demonstrate a spin echo.</p>
+      </div>
+      <div class="card">
+        <h3><a href="vector-array.html">3D vector array</a></h3>
+        <p>An X×Y×Z lattice of spins over a 25&nbsp;cm FOV. Orbit, zoom, snap to axial / sagittal /
+          coronal views, and show averages, trails and “mini magnet” shading.</p>
+      </div>
+      <div class="card">
+        <h3><a href="sequence-panel.html">Sequence panel</a></h3>
+        <p>RF, Gx, Gy, Gz and signal waveforms with a scrubbable timeline. Record your own
+          waveforms with live sliders, then save or export them.</p>
+      </div>
+      <div class="card">
+        <h3><a href="pulseq.html">Pulseq compatible</a></h3>
+        <p>Load any Pulseq <code>.seq</code> file with import scaling, and use optional
+          <code># Simmr…</code> comment directives to set the matrix, relaxation, view and more.</p>
+      </div>
+      <div class="card">
+        <h3>Slowed down to see</h3>
+        <p>Sequences play about 1000× slower (1&nbsp;ms ≈ 1&nbsp;s), and gradients are scaled so
+          phase is visible as a fraction of the field of view.</p>
+      </div>
+    </div>
+
+    <h2>Getting started</h2>
+    <div class="split">
+      <div>
+        <p>On launch, the welcome screen offers several entry points:</p>
+        <ul>
+          <li><strong>Quick Tour</strong> — a short guided introduction to the controls.</li>
+          <li><strong>Basic Examples</strong> — step through the introductory physics examples.</li>
+          <li><strong>Full Tour</strong> — a complete walkthrough of the Full View.</li>
+          <li><strong>Full View</strong> — spins, waveforms and playback together.</li>
+          <li><strong>Direct Control View</strong> — manipulate spins directly.</li>
+        </ul>
+        <p>The welcome screen can be skipped in future, and shown again from Settings.</p>
+
+        <h3>Notes on scaling</h3>
+        <ul>
+          <li>Pulseq <code>.seq</code> files use Hz for RF and Hz/m for gradients; Spintuition converts
+            these and displays kHz, kHz/m and ms.</li>
+          <li>Playback is ~1000× slower, so 1&nbsp;ms plays in about 1&nbsp;s, but ms remain the main unit.</li>
+          <li>The FOV is 25&nbsp;cm, approximately head-sized.</li>
+          <li>Gradient amplitudes are reduced 50× by default. For example, a 25&nbsp;cm FOV with
+            1&nbsp;mm resolution (250 matrix) becomes 5&nbsp;cm resolution — a 5×5 matrix, where you
+            see about 5 cycles across the FOV over the readout.</li>
+        </ul>
+      </div>
+      <figure>
+        <img class="shot" src="img/welcome.jpg" alt="Spintuition welcome screen">
+        <figcaption>Welcome screen</figcaption>
+      </figure>
+    </div>
+
+    <h2>Build and run</h2>
+    <p>Spintuition is an iOS (SwiftUI + SceneKit) app. Open <code>Simmr.xcodeproj</code> in Xcode and
+      run on a simulator, or deploy to an iPhone in developer mode. From the project directory:</p>
+<pre><code>./scripts/build-and-launch.sh
+SIMULATOR_NAME="iPhone 17 Pro" ./scripts/build-and-launch.sh</code></pre>
+  </main>
+
+  <footer>Spintuition — interactive MRI spin dynamics</footer>
+</body>
+</html>

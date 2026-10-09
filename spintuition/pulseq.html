@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pulseq — Spintuition</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="index.html"><img src="img/spinicon.png" alt="">Spintuition</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="examples.html">Examples</a>
+        <a href="direct-control.html">Direct Control</a>
+        <a href="vector-array.html">Vector Array</a>
+        <a href="sequence-panel.html">Sequence Panel</a>
+        <a class="active" href="pulseq.html">Pulseq</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Pulseq Panel</h1>
+    <p class="lead">Spintuition reads and writes <a href="https://pulseq.github.io/">Pulseq</a>
+      <code>.seq</code> files, so sequences can move between Spintuition and other MRI tools.</p>
+    <p>Open the Sequences panel with the sequence icon at the top of the Full View. Tap a sequence to
+      review its description, duration and spin matrix before loading it.</p>
+
+    <h2>Sequence library</h2>
+    <table>
+      <tr><th>Category</th><th>Contents</th></tr>
+      <tr><td>Basic</td><td>MRI fundamentals and introductory <a href="examples.html">examples</a>, bundled with the app.</td></tr>
+      <tr><td>Advanced</td><td>Complete and steady-state pulse sequences, bundled with the app.</td></tr>
+      <tr><td>My Sequences</td><td>Sequences you saved from the main view. Rename with the pencil icon, swipe left to delete, and drag to reorder with Edit.</td></tr>
+    </table>
+    <ul>
+      <li>Loading a sequence replaces the current waveforms and spin matrix settings.</li>
+      <li><strong>Replace Waveforms</strong> turns off automatically on load, so the sequence is not accidentally overwritten.</li>
+      <li><strong>Load at Startup</strong> in the load dialog makes a sequence load at launch (only one at a time).</li>
+      <li>After loading, use <strong>Back to Start</strong> to replay it from the beginning.</li>
+    </ul>
+
+    <h2>Import scaling</h2>
+    <p>When loading a Pulseq file, the <strong>Pulseq Scaling</strong> controls adapt external sequences to
+      Spintuition’s visualization. They are applied after the waveforms are loaded:</p>
+    <ul>
+      <li><strong>Scale RF</strong> — RF amplitude (default 1.0)</li>
+      <li><strong>Scale Gx, Gy, Gz</strong> — gradient amplitude per axis (default 1.0)</li>
+    </ul>
+    <p>Pulseq gradients are converted from Hz/m to kHz/m and, by default, displayed at 1/50 scale so that
+      realistic resolutions produce a few visible cycles across the 25&nbsp;cm FOV. The
+      <code>SimmrGradScale</code> directive replaces this default.</p>
+
+    <h2>Export</h2>
+    <p><strong>Share Waveforms</strong> on the <a href="sequence-panel.html">sequence panel</a> exports the current
+      waveforms as a <code>.seq</code> file, including Simmr directives that restore the matrix and display
+      state when it is reimported.</p>
+
+    <h2>Writing sequences in MATLAB</h2>
+    <p>The bundled examples are generated with the Pulseq MATLAB toolbox (see <code>matlab_pulseq/</code>).
+      Directives can be added with <code>setDefinition</code>:</p>
+<pre><code>seq = mr.Sequence();
+seq.setDefinition('#SimmrDescription', 'x Gradient: spins rotate at different rates depending on x position.')
+seq.setDefinition('# SimmrMatrixSize', ' 5 1 1')
+seq.setDefinition('# SimmrSpinInit',   ' x')
+seq.setDefinition('# SimmrT1',         ' 100')
+seq.setDefinition('# SimmrT2',         ' 40')
+seq.setDefinition('# SimmrView',       ' obl')
+
+gx = mr.makeTrapezoid('x', 'FlatArea', 20000*10e-3, 'FlatTime', 10e-3, 'system', sys);
+seq.addBlock(gx);
+seq.write('A2_x_gradient.seq');</code></pre>
+
+    <h2 id="directives">Simmr directives</h2>
+    <p>Spintuition reads optional app-specific directives from comments in Pulseq <code>.seq</code> files.
+      Other Pulseq tools ignore these lines as ordinary comments. The prefix remains <code>Simmr</code> for
+      file compatibility.</p>
+
+    <h3>Syntax</h3>
+<pre><code># SimmrMatrixSize 5 5 3
+# SimmrSpinInit z
+# SimmrLabFrame off</code></pre>
+    <ul>
+      <li>One directive per comment line. Directives may appear anywhere; placing them before
+        <code>[VERSION]</code> makes them easier to find.</li>
+      <li>Names are case-insensitive, and whitespace between <code>#</code> and the name is optional.</li>
+      <li>A colon or equals sign may separate name and value; a space is canonical.</li>
+      <li>Invalid or unknown directives are ignored. For single-value directives the last valid value wins.</li>
+      <li><code>SimmrSpinInit</code> and <code>SimmrPause</code> are repeatable and accumulate timed events.</li>
+      <li>Unless noted, times are in ms and frequencies in kHz, matching the app controls.</li>
+    </ul>
+
+    <h3>Sequence information</h3>
+    <table>
+      <tr><th>Directive</th><th>Value</th><th>Effect</th></tr>
+      <tr><td><code>SimmrDescription &lt;text&gt;</code></td><td>Nonempty text</td><td>Description shown when the sequence is loaded. May also be a <code>[DEFINITIONS]</code> entry; the comment takes precedence.</td></tr>
+      <tr><td><code>SimmrID &lt;UUID&gt;</code></td><td>UUID</td><td>Stable identifier preserved across export and reimport.</td></tr>
+      <tr><td><code>SimmrCreatedAt &lt;date&gt;</code></td><td>Unix seconds or ISO-8601</td><td>Original creation date preserved across export and reimport.</td></tr>
+      <tr><td><code>SimmrCategory &lt;Basic|Advanced&gt;</code></td><td><code>Basic</code> / <code>Advanced</code></td><td>Library category for bundled sequences; no effect on user imports.</td></tr>
+    </table>
+
+    <h3>Spin matrix and playback</h3>
+    <table>
+      <tr><th>Directive</th><th>Value</th><th>Effect</th></tr>
+      <tr><td><code>SimmrMatrixSize &lt;x&gt; &lt;y&gt; &lt;z&gt;</code></td><td>Three integers</td><td>Spin counts along X, Y, Z (minimum 1 each).</td></tr>
+      <tr><td><code>SimmrSpinInit &lt;axis&gt; [time]</code></td><td><code>x</code>, <code>y</code>, <code>z</code>, <code>random</code>; optional time (ms)</td><td>Initializes all spins at time zero, or resets them at the given time. Repeat to schedule multiple resets. <code>random</code> randomizes orientation and magnitude.</td></tr>
+      <tr><td><code>SimmrPause &lt;time&gt;</code></td><td>Time ≥ 0 (ms)</td><td>Pauses playback at that time. Repeat for multiple pauses.</td></tr>
+      <tr><td><code>SimmrSS &lt;count&gt;</code></td><td>Positive integer</td><td>Prepares the initial magnetization by simulating the sequence for this many repetitions (steady state). May also be a <code>[DEFINITIONS]</code> entry.</td></tr>
+    </table>
+
+    <h3>Simulation settings</h3>
+    <table>
+      <tr><th>Directive</th><th>Value</th><th>Effect</th></tr>
+      <tr><td><code>SimmrT1 &lt;time&gt;</code></td><td>ms</td><td>Longitudinal relaxation time (clamped to the app’s range).</td></tr>
+      <tr><td><code>SimmrT2 &lt;time&gt;</code></td><td>ms</td><td>Transverse relaxation time (clamped to the app’s range).</td></tr>
+      <tr><td><code>SimmrDf &lt;freq&gt;</code></td><td>kHz, may be negative</td><td>Uniform off-resonance frequency.</td></tr>
+      <tr><td><code>SimmrDfr &lt;freq&gt;</code></td><td>kHz, 0–1</td><td>Standard deviation of spatial off-resonance.</td></tr>
+      <tr><td><code>SimmrGradScale &lt;s&gt;</code></td><td>One number</td><td>Replaces the default 1/50 display scale for Gx, Gy, Gz. Load-dialog scales still apply afterward.</td></tr>
+      <tr><td><code>SimmrGradScale &lt;x&gt; &lt;y&gt; &lt;z&gt;</code></td><td>Three numbers</td><td>Independent display scales for Gx, Gy, Gz.</td></tr>
+      <tr><td><code>SimmrLabFrame &lt;on|off&gt;</code></td><td><code>on</code> / <code>off</code></td><td>Laboratory frame when on, rotating frame when off.</td></tr>
+      <tr><td><code>SimmrShowB1 &lt;on|off&gt;</code></td><td><code>on</code> / <code>off</code></td><td>Show the normalized B1 rotation-axis vector (visible only while RF is non-zero).</td></tr>
+    </table>
+
+    <h3>Vector display</h3>
+    <table>
+      <tr><th>Directive</th><th>Value</th><th>Effect</th></tr>
+      <tr><td><code>SimmrFadeUnexcited &lt;percent&gt;</code></td><td>0–25</td><td>Fade Unexcited Spin slider.</td></tr>
+      <tr><td><code>SimmrAverageXYZ &lt;on|off&gt;</code></td><td><code>on</code> / <code>off</code></td><td>Global XYZ average vector (suppressed for a single spin).</td></tr>
+      <tr><td><code>SimmrAverageX &lt;on|off&gt;</code></td><td><code>on</code> / <code>off</code></td><td>Averages along X (suppressed when X count is 1).</td></tr>
+      <tr><td><code>SimmrAverageY &lt;on|off&gt;</code></td><td><code>on</code> / <code>off</code></td><td>Averages along Y (suppressed when Y count is 1).</td></tr>
+      <tr><td><code>SimmrAverageZ &lt;on|off&gt;</code></td><td><code>on</code> / <code>off</code></td><td>Averages along Z (suppressed when Z count is 1).</td></tr>
+      <tr><td><code>SimmrTrail &lt;duration&gt;</code></td><td>ms, 0–2</td><td>Arrow-tip trail history.</td></tr>
+    </table>
+
+    <h3>Camera</h3>
+    <table>
+      <tr><th>Directive</th><th>Value</th><th>Effect</th></tr>
+      <tr><td><code>SimmrView &lt;view&gt;</code></td><td><code>ax</code>, <code>sag</code>, <code>cor</code>, <code>obl</code></td><td>Preset axial, sagittal, coronal or oblique view (full names also accepted). Takes precedence over camera vectors.</td></tr>
+      <tr><td><code>SimmrCameraDirection &lt;x&gt; &lt;y&gt; &lt;z&gt;</code></td><td>Three numbers</td><td>Camera viewing direction.</td></tr>
+      <tr><td><code>SimmrCameraRight &lt;x&gt; &lt;y&gt; &lt;z&gt;</code></td><td>Three numbers</td><td>Camera horizontal axis.</td></tr>
+      <tr><td><code>SimmrCameraUp &lt;x&gt; &lt;y&gt; &lt;z&gt;</code></td><td>Three numbers</td><td>Camera vertical axis.</td></tr>
+      <tr><td><code>SimmrCameraBasis &lt;9 values&gt;</code></td><td>Nine numbers</td><td>Compact form: direction, right, then up.</td></tr>
+    </table>
+    <p>Camera vectors are normalized when loaded, and the three separate vectors take effect only when all
+      three are valid. Canonical presets:</p>
+<pre><code># Axial — view along Z, X across, Y vertical
+# SimmrCameraBasis 0 0 1   1 0 0   0 1 0
+
+# Sagittal — view along X, Z across, Y vertical
+# SimmrCameraBasis -1 0 0  0 0 1   0 1 0
+
+# Coronal — view along Y, X across, Z vertical
+# SimmrCameraBasis 0 -1 0  1 0 0   0 0 1</code></pre>
+
+    <h3>Compatibility aliases</h3>
+    <table>
+      <tr><th>Preferred</th><th>Also accepted</th></tr>
+      <tr><td><code>SimmrView</code></td><td><code>SimmerView</code></td></tr>
+      <tr><td><code>SimmrSpinInit</code></td><td><code>SpinSimmrInit</code></td></tr>
+    </table>
+    <p class="note"><code>SimmrTimeMultiplier</code> appeared in older documentation but is no longer parsed;
+      Pulseq timing is converted to Spintuition’s millisecond timeline automatically.</p>
+
+    <h3>Full example</h3>
+<pre><code># SimmrDescription Slice-selective excitation example
+# SimmrID 5C57AF74-61DE-4D4B-931D-994D77D34F8A
+# SimmrCreatedAt 1791475200
+# SimmrMatrixSize 5 5 3
+# SimmrSpinInit z
+# SimmrSpinInit x 12.5
+# SimmrPause 8
+# SimmrSS 4
+# SimmrT1 40
+# SimmrT2 10
+# SimmrDf -0.25
+# SimmrDfr 0.1
+# SimmrGradScale 0.02
+# SimmrLabFrame off
+# SimmrShowB1 on
+# SimmrFadeUnexcited 10
+# SimmrAverageXYZ on
+# SimmrAverageX off
+# SimmrAverageY off
+# SimmrAverageZ on
+# SimmrTrail 1.5
+# SimmrView obl
+
+[VERSION]
+major 1
+minor 5
+revision 0</code></pre>
+  </main>
+
+  <footer>Spintuition — interactive MRI spin dynamics</footer>
+</body>
+</html>

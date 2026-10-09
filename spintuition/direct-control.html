@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Direct Control — Spintuition</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="index.html"><img src="img/spinicon.png" alt="">Spintuition</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="examples.html">Examples</a>
+        <a class="active" href="direct-control.html">Direct Control</a>
+        <a href="vector-array.html">Vector Array</a>
+        <a href="sequence-panel.html">Sequence Panel</a>
+        <a href="pulseq.html">Pulseq</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Direct Control Mode</h1>
+    <p class="lead">Direct control of the spins is useful for quick demonstrations and teaching — no pulse
+      sequence required.</p>
+    <p>Open it with <strong>Direct Control View</strong> on the welcome screen, or switch the spin control
+      mode with the <strong>Mode</strong> button below the playback controls in the expanded Spins view
+      (also available in Settings → Spin Control Mode).
+      Direct Spin Controls act on every spin in the <a href="vector-array.html">vector array</a> at once.</p>
+
+    <h2>Sliders</h2>
+    <table>
+      <tr><th>Control</th><th>Effect</th></tr>
+      <tr><td>Theta</td><td>Elevation angle of all vectors (degrees).</td></tr>
+      <tr><td>Phi</td><td>Azimuth angle of all vectors (degrees).</td></tr>
+      <tr><td>kx, ky, kz</td><td>Spatially dependent phase, in cycles per FOV — wind the spins into a k-space pattern along each axis.</td></tr>
+    </table>
+    <p class="note">Changing theta is not the same as an RF rotation when the transverse spin phases differ.</p>
+
+    <h2>Buttons</h2>
+    <table>
+      <tr><th>Button</th><th>Effect</th></tr>
+      <tr><td>M0</td><td>Resets all spins to the z axis.</td></tr>
+      <tr><td>T1</td><td>Applies T1 relaxation for a time of T1/10.</td></tr>
+      <tr><td>T2</td><td>Applies T2 relaxation for a time of T2/10.</td></tr>
+      <tr><td>Δf(r)</td><td>Simulates spatially varying “static” off-resonance. Each press adds repeatable dephasing.</td></tr>
+      <tr><td>D</td><td>Simulates random diffusive motion. Like Δf(r), but different with each press and not refocusable.</td></tr>
+      <tr><td>180x</td><td>Applies a 180° pulse about x. It negates all k-space, supplements theta and flips phi, as well as any phase accrued from Δf(r) or D.</td></tr>
+    </table>
+
+    <h2>Try it: a spin echo</h2>
+    <ol>
+      <li>Press <strong>M0</strong>, then set theta to 90° to tip the spins into the transverse plane.</li>
+      <li>Press <strong>Δf(r)</strong> a few times — the spins dephase.</li>
+      <li>Press <strong>180x</strong>.</li>
+      <li>Press <strong>Δf(r)</strong> the same number of times — the spins refocus into a spin echo.</li>
+    </ol>
+    <p>Repeat with <strong>D</strong> presses mixed in to see how diffusion causes signal loss that the
+      180° pulse cannot recover.</p>
+  </main>
+
+  <footer>Spintuition — interactive MRI spin dynamics</footer>
+</body>
+</html>

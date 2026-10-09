@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vector Array — Spintuition</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="index.html"><img src="img/spinicon.png" alt="">Spintuition</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="examples.html">Examples</a>
+        <a href="direct-control.html">Direct Control</a>
+        <a class="active" href="vector-array.html">Vector Array</a>
+        <a href="sequence-panel.html">Sequence Panel</a>
+        <a href="pulseq.html">Pulseq</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Vector Array (Spins Panel)</h1>
+    <div class="split">
+      <div>
+        <p class="lead">The Spins panel visualizes the magnetization of a three-dimensional lattice of
+          spins during MRI pulse sequences.</p>
+        <p>Each spin represents a group of protons treated as one magnetic dipole, drawn as an arrow
+          through a sphere. The matrix is simulated with the Bloch equations, including T1 and T2
+          relaxation and off-resonance.</p>
+        <p>Use the expand button (↗, top right) to view the spins full screen with additional controls.</p>
+      </div>
+      <figure>
+        <img class="shot" src="img/sel-excitation.jpg" alt="Expanded Spins view during selective excitation">
+        <figcaption>Selective excitation, expanded Spins view</figcaption>
+      </figure>
+    </div>
+
+    <h2>Navigation</h2>
+    <ul>
+      <li><strong>Drag</strong> to orbit the camera around the matrix.</li>
+      <li><strong>Pinch</strong> to zoom in and out.</li>
+      <li><strong>View buttons</strong> (left side) snap to Oblique, Axial, Sagittal and Coronal views.
+        Optional zoom and rotate animations can be enabled in Settings.</li>
+      <li><strong>Expand / collapse</strong> (top right) toggles the full-screen spins view.</li>
+    </ul>
+
+    <h2>Coordinate system</h2>
+    <table>
+      <tr><th>Axis</th><th>Color</th><th>Direction</th></tr>
+      <tr><td>X</td><td>Yellow</td><td>Left–right</td></tr>
+      <tr><td>Y</td><td>Cyan</td><td>Anterior–posterior</td></tr>
+      <tr><td>Z</td><td>Blue</td><td>Superior–inferior, along the main field B0</td></tr>
+    </table>
+    <p>The largest matrix dimension spans the full 25&nbsp;cm field of view; smaller dimensions keep the
+      same spin spacing.</p>
+
+    <h2>Matrix size</h2>
+    <p>Use the X, Y and Z steppers to add or remove spins (X × Y × Z). Sequences can set the matrix with
+      the <code>SimmrMatrixSize</code> <a href="pulseq.html#directives">directive</a>.</p>
+
+    <h2>Display options</h2>
+    <table>
+      <tr><th>Option</th><th>Description</th></tr>
+      <tr><td>Vector averages</td><td>Show the global XYZ average vector, or averages along X, Y or Z rows. Optionally average the transverse component only.</td></tr>
+      <tr><td>Fade Unexcited Spin</td><td>Fades spins with little transverse signal (0–25%), so excited spins stand out.</td></tr>
+      <tr><td>Show Trail</td><td>Draws a trail of the arrow tip over the last 0–2&nbsp;ms.</td></tr>
+      <tr><td>Show B1</td><td>Shows an orange RF rotation-axis vector while RF is on, normalized to the peak RF amplitude.</td></tr>
+      <tr><td>Lab Frame</td><td>Switch between the rotating frame (default) and the laboratory frame.</td></tr>
+      <tr><td>Spin Sphere Size</td><td>Settings option to change sphere size; set it to 0 to see vector length clearly.</td></tr>
+    </table>
+
+    <h2>Spin shading</h2>
+    <p>Choose in Settings → 3D Visualization:</p>
+    <ul>
+      <li><strong>Mini Magnets</strong> (default) — white/red hemispheres like small bar magnets; white faces
+        the magnetization direction.</li>
+      <li><strong>Phase Gray</strong> — grayscale by XY phase angle, from black (−180°) to white (+180°).</li>
+      <li><strong>Plain</strong> — uniform gray spheres for minimal visual complexity.</li>
+    </ul>
+
+    <h2>Video export</h2>
+    <p><strong>Export Video</strong> records the simulation through the full waveform duration at 30&nbsp;fps,
+      capturing the spins and waveforms as a QuickTime movie you can save or share.</p>
+  </main>
+
+  <footer>Spintuition — interactive MRI spin dynamics</footer>
+</body>
+</html>

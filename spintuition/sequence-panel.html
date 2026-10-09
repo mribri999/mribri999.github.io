@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sequence Panel — Spintuition</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="index.html"><img src="img/spinicon.png" alt="">Spintuition</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="examples.html">Examples</a>
+        <a href="direct-control.html">Direct Control</a>
+        <a href="vector-array.html">Vector Array</a>
+        <a class="active" href="sequence-panel.html">Sequence Panel</a>
+        <a href="pulseq.html">Pulseq</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Sequence Panel</h1>
+    <div class="split">
+      <div>
+        <p class="lead">In the Full View, the Waveforms panel shows the pulse sequence over time beneath
+          the spins, with playback controls at the bottom.</p>
+        <p>You can play a loaded sequence, scrub through it, or record your own waveforms live using
+          the Waveform Controls sliders. Use the expand button (↗) to view the waveforms full screen.</p>
+      </div>
+      <figure>
+        <img class="shot" src="img/full-view.jpg" alt="Full View with spins and waveforms for a y-gradient example">
+        <figcaption>Full View: spins, waveforms and playback</figcaption>
+      </figure>
+    </div>
+
+    <h2>Waveforms</h2>
+    <table>
+      <tr><th>Trace</th><th>Color</th><th>Units</th></tr>
+      <tr><td>RF</td><td>Blue</td><td>Magnitude (kHz) and phase (rad)</td></tr>
+      <tr><td>Gx</td><td>Green</td><td>kHz/m</td></tr>
+      <tr><td>Gy</td><td>Orange</td><td>kHz/m</td></tr>
+      <tr><td>Gz</td><td>Purple</td><td>kHz/m</td></tr>
+      <tr><td>Signal</td><td>Pink</td><td>Complex average transverse magnetization of all spins (enable in Settings)</td></tr>
+    </table>
+    <p><strong>Scrubbing:</strong> drag the vertical time marker to move through the sequence; the spins
+      update to match.</p>
+
+    <h2>Playback controls</h2>
+    <table>
+      <tr><th>Control</th><th>Action</th></tr>
+      <tr><td>Share Waveforms</td><td>Export a Pulseq <code>.seq</code> file, or save to My Sequences.</td></tr>
+      <tr><td>Back to Start</td><td>Return to time 0 without erasing waveforms.</td></tr>
+      <tr><td>Play Backward / Forward</td><td>Play through the sequence in either direction.</td></tr>
+      <tr><td>Step Backward / Forward</td><td>Play a short interval (0.5&nbsp;ms default step size).</td></tr>
+      <tr><td>Stop</td><td>Pause playback.</td></tr>
+      <tr><td>Restart</td><td>Clear all waveforms and reset to time 0.</td></tr>
+      <tr><td>Loop</td><td>Repeat playback continuously.</td></tr>
+      <tr><td>Speed / Step Size</td><td>Adjust playback speed and step size (expanded views).</td></tr>
+    </table>
+    <p>Sequences may also include pause points (<code>SimmrPause</code>), where playback stops until you
+      press play — used for example in the 5×5 encoding sequence.</p>
+
+    <h2>Waveform controls</h2>
+    <p>Open with the slider icon on the Waveforms panel. RF and Δf are in kHz, gradients in kHz/m and
+      relaxation in ms.</p>
+    <table>
+      <tr><th>Control</th><th>Description</th></tr>
+      <tr><td>B1x</td><td>RF excitation field strength (kHz).</td></tr>
+      <tr><td>Δf</td><td>Off-resonance frequency (kHz).</td></tr>
+      <tr><td>Gx, Gy, Gz</td><td>Gradient strengths (kHz/m).</td></tr>
+      <tr><td>T1</td><td>Longitudinal relaxation, 1–200&nbsp;ms (log scale).</td></tr>
+      <tr><td>T2</td><td>Transverse relaxation, 1–50&nbsp;ms (log scale).</td></tr>
+      <tr><td>Replace Waveforms</td><td><strong>On:</strong> playing forward or moving sliders records new waveform frames.
+        <strong>Off:</strong> sliders affect only the live simulation, and playback uses the recorded waveforms.
+        Turned off automatically when a sequence is loaded.</td></tr>
+      <tr><td>Lab Frame</td><td>Off: rotating frame (default). On: laboratory frame with carrier precession.</td></tr>
+      <tr><td>Show B1</td><td>Show the RF rotation-axis vector while RF is non-zero.</td></tr>
+    </table>
+
+    <h2>Recording your own sequence</h2>
+    <ol>
+      <li>Turn <strong>Replace Waveforms</strong> on and press Play Forward.</li>
+      <li>Move the B1x and gradient sliders while it plays — the timeline grows as you record (up to the
+        maximum time in Settings).</li>
+      <li>Press <strong>Back to Start</strong>, turn Replace Waveforms off, and play it back.</li>
+      <li>Use <strong>Share Waveforms</strong> to save it to My Sequences or export a
+        <a href="pulseq.html">Pulseq</a> file.</li>
+    </ol>
+  </main>
+
+  <footer>Spintuition — interactive MRI spin dynamics</footer>
+</body>
+</html>
