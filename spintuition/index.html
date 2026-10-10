@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Spintuition — Interactive 3D MRI Spin Dynamics</title>
-  <meta name="description" content="Spintuition is an iOS app for interactive, intuitive 3D visualization of MRI spin dynamics for teaching, learning and interpretation.">
+  <meta name="description" content="Spintuition is an iOS app for interactive, intuitive 3D visualization of MRI spin dynamics for teaching, learning and interpretation.  We welcome your feedback and ideas to help teach MRI principles.  
+All code will be shared through GitHub (soon!)">
+  <link rel="icon" type="image/png" href="img/spinicon.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -27,7 +29,14 @@
     <p class="lead">Interactive, intuitive 3D graphical representations of MRI spin dynamics to aid in
       teaching, learning and interpretation.</p>
 
-    <img class="hero-img" src="img/header.jpg" alt="Spintuition welcome screen, Full View with spins and waveforms, and expanded spin view">
+    <div class="hero-videos">
+      <video src="video/excitation.mp4" poster="img/excitation-poster.jpg"
+             autoplay muted loop playsinline aria-label="Excitation: a spin tipped into the transverse plane"></video>
+      <video src="video/spiral.mp4" poster="img/spiral-poster.jpg"
+             autoplay muted loop playsinline aria-label="Spiral sequence: gradient waveforms and spins during a spiral readout"></video>
+      <video src="video/spinechoseq.mp4" poster="img/spinechoseq-poster.jpg"
+             autoplay muted loop playsinline aria-label="Spin echo sequence in the Full View"></video>
+    </div>
 
     <p>Beginning with a quick tour and basic examples, you can advance to view RF and gradient
       waveforms, directly control RF/gradients, or directly manipulate the spins themselves for
@@ -37,32 +46,50 @@
     <h2>Highlights</h2>
     <div class="cards">
       <div class="card">
-        <h3><a href="examples.html">Guided examples</a></h3>
+        <div class="card-head">
+          <img class="card-img" src="img/examples.png" alt="Guided examples">
+          <h3><a href="examples.html">Guided examples</a></h3>
+        </div>
         <p>A built-in series walks from polarization and precession through gradients, encoding,
           selective excitation, spin echoes, and on to EPI, spiral, CPMG and bSSFP.</p>
       </div>
       <div class="card">
-        <h3><a href="direct-control.html">Direct control</a></h3>
+        <div class="card-head">
+          <img class="card-img" src="img/direct.png" alt="Direct control panel">
+          <h3><a href="direct-control.html">Direct control</a></h3>
+        </div>
         <p>Set spin angles and k-space phase directly, apply relaxation, off-resonance, diffusion
           and 180° pulses — a quick way to demonstrate a spin echo.</p>
       </div>
       <div class="card">
-        <h3><a href="vector-array.html">3D vector array</a></h3>
+        <div class="card-head">
+          <img class="card-img" src="img/vector.png" alt="3D vector array">
+          <h3><a href="vector-array.html">3D vector array</a></h3>
+        </div>
         <p>An X×Y×Z lattice of spins over a 25&nbsp;cm FOV. Orbit, zoom, snap to axial / sagittal /
           coronal views, and show averages, trails and “mini magnet” shading.</p>
       </div>
       <div class="card">
-        <h3><a href="sequence-panel.html">Sequence panel</a></h3>
+        <div class="card-head">
+          <img class="card-img" src="img/sequences.png" alt="Sequence panel">
+          <h3><a href="sequence-panel.html">Sequence panel</a></h3>
+        </div>
         <p>RF, Gx, Gy, Gz and signal waveforms with a scrubbable timeline. Record your own
           waveforms with live sliders, then save or export them.</p>
       </div>
       <div class="card">
-        <h3><a href="pulseq.html">Pulseq compatible</a></h3>
+        <div class="card-head">
+          <img class="card-img" src="img/pulseq.png" alt="Pulseq sequence waveforms">
+          <h3><a href="pulseq.html">Pulseq compatible</a></h3>
+        </div>
         <p>Load any Pulseq <code>.seq</code> file with import scaling, and use optional
           <code># Simmr…</code> comment directives to set the matrix, relaxation, view and more.</p>
       </div>
       <div class="card">
-        <h3>Slowed down to see</h3>
+        <div class="card-head">
+          <img class="card-img" src="img/slowed.png" alt="Slowed-down playback">
+          <h3>Slowed down to see</h3>
+        </div>
         <p>Sequences play about 1000× slower (1&nbsp;ms ≈ 1&nbsp;s), and gradients are scaled so
           phase is visible as a fraction of the field of view.</p>
       </div>
@@ -81,16 +108,7 @@
         </ul>
         <p>The welcome screen can be skipped in future, and shown again from Settings.</p>
 
-        <h3>Notes on scaling</h3>
-        <ul>
-          <li>Pulseq <code>.seq</code> files use Hz for RF and Hz/m for gradients; Spintuition converts
-            these and displays kHz, kHz/m and ms.</li>
-          <li>Playback is ~1000× slower, so 1&nbsp;ms plays in about 1&nbsp;s, but ms remain the main unit.</li>
-          <li>The FOV is 25&nbsp;cm, approximately head-sized.</li>
-          <li>Gradient amplitudes are reduced 50× by default. For example, a 25&nbsp;cm FOV with
-            1&nbsp;mm resolution (250 matrix) becomes 5&nbsp;cm resolution — a 5×5 matrix, where you
-            see about 5 cycles across the FOV over the readout.</li>
-        </ul>
+	Also note that in the waveform/sequence panel, you can use the controls icon to manually turn on RF and gradients.
       </div>
       <figure>
         <img class="shot" src="img/welcome.jpg" alt="Spintuition welcome screen">

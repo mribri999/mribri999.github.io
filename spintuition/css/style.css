@@ -65,6 +65,21 @@ h2 { font-size: 1.4rem; margin-top: 2.25rem; border-bottom: 1px solid var(--bord
 h3 { font-size: 1.1rem; margin-top: 1.5rem; }
 .lead { font-size: 1.15rem; color: var(--muted); }
 
+/* Three hero videos at equal height: columns sized by aspect ratio
+   (portrait 444x960, spiral 640x480, portrait 444x960) */
+.hero-videos {
+  display: grid;
+  grid-template-columns: 0.4625fr 1.3333fr 0.4625fr;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.hero-videos video {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #000;
+}
 .hero-img { width: 100%; border-radius: 10px; border: 1px solid var(--border); margin: 1rem 0; }
 
 /* Cards */
@@ -149,4 +164,19 @@ footer {
   font-size: 0.85rem;
   text-align: center;
   padding: 1.5rem 1rem;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.card-head h3 { margin: 0; }
+.card-img {
+  flex: 0 0 50%;
+  width: 50%;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background: #000;
 }
