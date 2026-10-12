@@ -18,6 +18,7 @@
         <a href="vector-array.html">Vector Array</a>
         <a href="sequence-panel.html">Sequence Panel</a>
         <a class="active" href="pulseq.html">Pulseq</a>
+        <a href="privacy.html">Privacy</a>
       </nav>
     </div>
   </header>
@@ -50,9 +51,10 @@
       <li><strong>Scale RF</strong> — RF amplitude (default 1.0)</li>
       <li><strong>Scale Gx, Gy, Gz</strong> — gradient amplitude per axis (default 1.0)</li>
     </ul>
-    <p>Pulseq gradients are converted from Hz/m to kHz/m and, by default, displayed at 1/50 scale so that
-      realistic resolutions produce a few visible cycles across the 25&nbsp;cm FOV. The
+    <p>Pulseq gradients are converted from Hz/m to kHz/m.  By default they are also scaled by 1/50 so that
+      realistic resolutions produce a few visible cycles across the 25&nbsp;cm FOV (1/4 m). The
       <code>SimmrGradScale</code> directive replaces this default.</p>
+	<p>Note that at 25cm FOV,  the scaling from kHz/m to kHz/FOV 			is just a division by 4!</p>
 
     <h2>Export</h2>
     <p><strong>Share Waveforms</strong> on the <a href="sequence-panel.html">sequence panel</a> exports the current
