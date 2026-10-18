@@ -63,6 +63,7 @@ main {
 h1 { font-size: 2rem; margin: 0.5rem 0 0.75rem; }
 h1.page-title { display: flex; align-items: center; gap: 0.6rem; }
 h1.page-title img { width: 48px; height: 48px; border-radius: 22%; flex-shrink: 0; }
+h1.page-title sup { font-size: 0.4em; font-weight: 600; margin-left: 0.1em; }
 h2 { font-size: 1.4rem; margin-top: 2.25rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
 h3 { font-size: 1.1rem; margin-top: 1.5rem; }
 .lead { font-size: 1.15rem; color: var(--muted); }
