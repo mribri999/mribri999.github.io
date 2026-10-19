@@ -28,30 +28,27 @@
     <h1 class="page-title"><img src="img/AppIcon60.png" alt="">Direct Control Mode</h1>
     <p class="lead">Direct control of the spins is useful for quick demonstrations and teaching — no pulse
       sequence required.</p>
-    <p>Open it with <strong>Direct Control View</strong> on the welcome screen, or switch the spin control
-      mode with the <strong>Mode</strong> button below the playback controls in the expanded Spins view
-      (also available in Settings → Spin Control Mode).
-      Direct Spin Controls act on every spin in the <a href="vector-array.html">vector array</a> at once.</p>
+    <div class="split">
+      <div>
+        <p>Open it with <strong>Direct Control View</strong> on the welcome screen, or switch the spin control
+          mode with the <strong>Mode</strong> button below the playback controls in the expanded Spins view
+          (also available in Settings → Spin Control Mode).
+          Direct Spin Controls act on every spin in the <a href="vector-array.html">vector array</a> at once.</p>
 
-    <h2>Sliders</h2>
-    <table>
-      <tr><th>Control</th><th>Effect</th></tr>
-      <tr><td>Theta</td><td>Elevation angle of all vectors (degrees).</td></tr>
-      <tr><td>Phi</td><td>Azimuth angle of all vectors (degrees).</td></tr>
-      <tr><td>kx, ky, kz</td><td>Spatially dependent phase, in cycles per FOV — wind the spins into a k-space pattern along each axis.</td></tr>
-    </table>
-    <p class="note">Changing theta is not the same as an RF rotation when the transverse spin phases differ.</p>
-
-    <h2>kx-ky pad</h2>
-    <p>The kx-ky pad sets kx and ky together. Drag the dot anywhere on the pad, from −2 to 2 cycles per FOV
-      on each axis, and the spins wind into the matching phase pattern straight away. The line on the pad
-      traces the path you have taken through k-space, and the current kx and ky values are shown underneath.
-      Use the X and Y <strong>−</strong>/<strong>+</strong> buttons for finer steps, and the reset button
-      to return to the center of k-space. See the <a href="kx-ky.html">kx-ky Pad page</a> for more.</p>
-    <figure>
-      <img class="shot" src="img/kx-ky.jpg" alt="Direct control kx-ky pad next to the vector array, showing a k-space trace and spins wound into a phase pattern">
-      <figcaption>The kx-ky pad (left) and the resulting spin phase pattern (right)</figcaption>
-    </figure>
+        <h2>Sliders</h2>
+        <table>
+          <tr><th>Control</th><th>Effect</th></tr>
+          <tr><td>Theta</td><td>Elevation angle of all vectors (degrees).</td></tr>
+          <tr><td>Phi</td><td>Azimuth angle of all vectors (degrees).</td></tr>
+          <tr><td>kx, ky, kz</td><td>Spatially dependent phase, in cycles per FOV — wind the spins into a k-space pattern along each axis.</td></tr>
+        </table>
+        <p class="note">Changing theta is not the same as an RF rotation when the transverse spin phases differ.</p>
+      </div>
+      <figure>
+        <img class="shot" src="img/direct-control.jpg" alt="Direct control panel with theta, phi and kx, ky, kz sliders below a 5×5 spin array wound along x">
+        <figcaption>Direct control with kx = 1.75</figcaption>
+      </figure>
+    </div>
 
     <h2>Buttons</h2>
     <table>
