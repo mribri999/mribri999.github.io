@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>kx-ky Pad — Spintuition</title>
+  <link rel="icon" type="image/png" href="img/spinicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="index.html"><img src="img/spinicon.png" alt="">Spintuition</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="examples.html">Examples</a>
+        <a href="direct-control.html">Direct Control</a>
+        <a class="active" href="kx-ky.html">kx-ky Pad</a>
+        <a href="vector-array.html">Vector Array</a>
+        <a href="sequence-panel.html">Sequence Panel</a>
+        <a href="pulseq.html">Pulseq</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1 class="page-title"><img src="img/AppIcon60.png" alt="">kx-ky Pad</h1>
+    <p class="lead">Move through 2D k-space by hand and watch the spins wind into the matching phase
+      pattern as you go.</p>
+    <p>The kx-ky pad is part of <a href="direct-control.html">Direct Control mode</a>. Like the other
+      direct spin controls, it acts on every spin in the <a href="vector-array.html">vector array</a> at once.</p>
+
+    <figure>
+      <img class="shot" src="img/kx-ky.jpg" alt="Direct control kx-ky pad next to the vector array, showing a k-space trace and spins wound into a phase pattern">
+      <figcaption>The kx-ky pad (left) and the resulting spin phase pattern (right)</figcaption>
+    </figure>
+
+    <h2>Controls</h2>
+    <table>
+      <tr><th>Control</th><th>Effect</th></tr>
+      <tr><td>Pad</td><td>Drag the dot to set kx and ky together, from −2 to 2 cycles per FOV on each axis.</td></tr>
+      <tr><td>X −/+</td><td>Steps kx down or up in fine increments.</td></tr>
+      <tr><td>Y −/+</td><td>Steps ky down or up in fine increments.</td></tr>
+      <tr><td>Reset</td><td>Returns to the center of k-space (kx = ky = 0).</td></tr>
+    </table>
+    <p>The line on the pad traces the path you have taken through k-space, and the current kx and ky
+      values are shown underneath the pad.</p>
+
+    <h2>What you are seeing</h2>
+    <p>Each point on the pad is a position in k-space. kx winds the spin phase along x and ky winds it
+      along y, in cycles across the field of view. At the center, all spins point the same way and the
+      net signal is largest. Moving away from the center winds the spins into a pattern of stripes whose
+      direction follows the angle of the dot and whose spacing shrinks as the dot moves farther out.</p>
+
+    <h2>Try it</h2>
+    <ol>
+      <li>Press <strong>M0</strong>, then set theta to 90° to tip the spins into the transverse plane.</li>
+      <li>Drag the dot straight along the kx axis and watch stripes form across x.</li>
+      <li>Drag it along ky, then diagonally, and watch the stripes turn to follow.</li>
+      <li>Trace out an EPI-like raster or a spiral from the center, then compare with the
+        <a href="examples.html">EPI and Spiral examples</a>.</li>
+    </ol>
+  </main>
+
+  <footer>Spintuition — interactive MRI spin dynamics</footer>
+</body>
+</html>
