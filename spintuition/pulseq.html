@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pulseq — Spintuition</title>
+  <title>Sequences — Spintuition</title>
   <link rel="icon" type="image/png" href="img/spinicon.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -14,36 +14,44 @@
       <nav>
         <a href="index.html">Home</a>
         <a href="examples.html">Examples</a>
+        <a href="vector-array.html">Vector Array</a>
         <a href="direct-control.html">Direct Control</a>
         <a href="kx-ky.html">kx-ky Pad</a>
-        <a href="vector-array.html">Vector Array</a>
-        <a href="sequence-panel.html">Sequence Panel</a>
-        <a class="active" href="pulseq.html">Pulseq</a>
+        <a href="sequence-panel.html">Waveforms</a>
+        <a class="active" href="pulseq.html">Sequences</a>
         <a href="privacy.html">Privacy</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <h1 class="page-title"><img src="img/AppIcon60.png" alt="">Pulseq Panel</h1>
+    <h1 class="page-title"><img src="img/AppIcon60.png" alt="">Sequences</h1>
     <p class="lead">Spintuition reads and writes <a href="https://pulseq.github.io/">Pulseq</a>
       <code>.seq</code> files, so sequences can move between Spintuition and other MRI tools.</p>
-    <p>Open the Sequences panel with the sequence icon at the top of the Full View. Tap a sequence to
-      review its description, duration and spin matrix before loading it.</p>
+    <div class="split">
+      <div>
+        <p>Open the Sequences panel with the sequence icon at the top of the Full View. Tap a sequence to
+          review its description, duration and spin matrix before loading it.</p>
 
-    <h2>Sequence library</h2>
-    <table>
-      <tr><th>Category</th><th>Contents</th></tr>
-      <tr><td>Basic</td><td>MRI fundamentals and introductory <a href="examples.html">examples</a>, bundled with the app.</td></tr>
-      <tr><td>Advanced</td><td>Complete and steady-state pulse sequences, bundled with the app.</td></tr>
-      <tr><td>My Sequences</td><td>Sequences you saved from the main view. Rename with the pencil icon, swipe left to delete, and drag to reorder with Edit.</td></tr>
-    </table>
-    <ul>
-      <li>Loading a sequence replaces the current waveforms and spin matrix settings.</li>
-      <li><strong>Replace Waveforms</strong> turns off automatically on load, so the sequence is not accidentally overwritten.</li>
-      <li><strong>Load at Startup</strong> in the load dialog makes a sequence load at launch (only one at a time).</li>
-      <li>After loading, use <strong>Back to Start</strong> to replay it from the beginning.</li>
-    </ul>
+        <h2>Sequence library</h2>
+        <table>
+          <tr><th>Category</th><th>Contents</th></tr>
+          <tr><td>Basic</td><td>MRI fundamentals and introductory <a href="examples.html">examples</a>, bundled with the app.</td></tr>
+          <tr><td>Advanced</td><td>Complete and steady-state pulse sequences, bundled with the app.</td></tr>
+          <tr><td>My Sequences</td><td>Sequences you saved from the main view. Rename with the pencil icon, swipe left to delete, and drag to reorder with Edit.</td></tr>
+        </table>
+        <ul>
+          <li>Loading a sequence replaces the current waveforms and spin matrix settings.</li>
+          <li><strong>Replace Waveforms</strong> turns off automatically on load, so the sequence is not accidentally overwritten.</li>
+          <li><strong>Load at Startup</strong> in the load dialog makes a sequence load at launch (only one at a time).</li>
+          <li>After loading, use <strong>Back to Start</strong> to replay it from the beginning.</li>
+        </ul>
+      </div>
+      <figure>
+        <img class="shot" src="img/sequences-full.jpg" alt="Sequences panel showing the Basic library list">
+        <figcaption>Sequences panel: Basic library</figcaption>
+      </figure>
+    </div>
 
     <h2>Import scaling</h2>
     <p>When loading a Pulseq file, the <strong>Pulseq Scaling</strong> controls adapt external sequences to
@@ -58,7 +66,7 @@
 	<p>Note that at 25cm FOV,  the scaling from kHz/m to kHz/FOV 			is just a division by 4!</p>
 
     <h2>Export</h2>
-    <p><strong>Share Waveforms</strong> on the <a href="sequence-panel.html">sequence panel</a> exports the current
+    <p><strong>Share Waveforms</strong> on the <a href="sequence-panel.html">Waveforms panel</a> exports the current
       waveforms as a <code>.seq</code> file, including Simmr directives that restore the matrix and display
       state when it is reimported.</p>
 
