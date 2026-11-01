@@ -15,10 +15,10 @@
         <a href="index.html">Home</a>
         <a href="examples.html">Examples</a>
         <a href="vector-array.html">Vector Array</a>
+        <a class="active" href="sequences.html">Sequences</a>
+        <a href="waveforms.html">Waveforms</a>
         <a href="direct-control.html">Direct Control</a>
         <a href="kx-ky.html">kx-ky Pad</a>
-        <a href="waveforms.html">Waveforms</a>
-        <a class="active" href="sequences.html">Sequences</a>
         <a href="privacy.html">Privacy</a>
       </nav>
     </div>
@@ -204,6 +204,45 @@ major 1
 minor 5
 revision 0</code></pre>
     <p>You can download/modify the examples <a href="downloads/spintuition-examples.tar" download>here</a>.</p>
+
+    <h2 id="custom-object">Custom scan object</h2>
+    <p>Instead of a regular X×Y×Z lattice, a sequence can define its own scan object: a set of spins,
+      each with its own location, relaxation times and optional text label. Each
+      <code>SimmrObject</code> comment adds one spin, in file order:</p>
+<pre><code># SimmrObject x,y,z,T1,T2,"label",dx,dy,dz</code></pre>
+    <table>
+      <tr><th>Field</th><th>Units</th><th>Default</th><th>Meaning</th></tr>
+      <tr><td><code>x,y,z</code></td><td>mm</td><td><code>0,0,0</code></td><td>Spin location.</td></tr>
+      <tr><td><code>T1,T2</code></td><td>ms</td><td><code>200,50</code></td><td>Relaxation times for this spin (must be ≥ 0; T2 &gt; T1 is allowed).</td></tr>
+      <tr><td><code>"label"</code></td><td>—</td><td>none</td><td>Text shown next to the spin when <strong>Labels</strong> is on. Must be in double quotes; commas are allowed, and <code>""</code> gives a literal quote.</td></tr>
+      <tr><td><code>dx,dy,dz</code></td><td>mm</td><td><code>12,12,0</code></td><td>Offset of the label from the spin.</td></tr>
+    </table>
+    <p>Trailing fields can be omitted, and empty fields between commas take their defaults — for example
+      <code># SimmrObject ,,,,,"Center"</code> adds a default spin at the center labeled “Center”, and a bare
+      <code># SimmrObject</code> adds a default unlabeled spin. Malformed entries are ignored.</p>
+    <p>Notes:</p>
+    <ul>
+      <li>Any valid <code>SimmrObject</code> entry selects the <strong>Sequence-Defined</strong> scan subject,
+        overriding <code>SimmrMatrixSize</code>. It stays selected until you choose another subject, and can be
+        reselected later from Scan Subjects.</li>
+      <li>Loading a sequence with <code>SimmrObject</code> entries switches the app to Advanced mode.</li>
+      <li>Only the global XYZ average vector is available, since the spins are not on a lattice.</li>
+      <li>Object definitions are kept when the sequence is saved to the library or exported to Pulseq.</li>
+      <li>Spins can also be added and edited interactively with <a href="vector-array.html#menu">Add Object
+        and Select Spin</a> in the spin options menu.</li>
+    </ul>
+
+    <h3>Example: T1 and T2 phantoms</h3>
+    <p>Two labeled spins with different relaxation, as used in the C3 T2 Decay and C4 Inversion examples:</p>
+<pre><code># SimmrObject -100,0,0,20,10,"T1=20,T2=10ms",0,25,0
+# SimmrObject 100,0,0,100,50,"T1=100,T2=50ms",0,25,0
+# SimmrRendering Gray |Mxy|</code></pre>
+
+    <h3>Writing objects in MATLAB</h3>
+    <p>Pulseq’s <code>setDefinition</code> replaces an earlier value with the same key, so include the object
+      fields in the key (as with repeated <code>SimmrPause</code> comments) to write one line per spin:</p>
+<pre><code>seq.setDefinition('# SimmrObject -100,0,0,20,10,"Short",0,25,0', ' ');
+seq.setDefinition('# SimmrObject 100,0,0,200,100,"Long",0,25,0', ' ');</code></pre>
   </main>
 
   <footer>Spintuition — interactive MRI spin dynamics</footer>

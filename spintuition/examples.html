@@ -15,10 +15,10 @@
         <a href="index.html">Home</a>
         <a class="active" href="examples.html">Examples</a>
         <a href="vector-array.html">Vector Array</a>
+        <a href="sequences.html">Sequences</a>
+        <a href="waveforms.html">Waveforms</a>
         <a href="direct-control.html">Direct Control</a>
         <a href="kx-ky.html">kx-ky Pad</a>
-        <a href="waveforms.html">Waveforms</a>
-        <a href="sequences.html">Sequences</a>
         <a href="privacy.html">Privacy</a>
       </nav>
     </div>
@@ -54,8 +54,8 @@
       <tr><td>A2 x Gradient</td><td>5×1×1</td><td>With Gx on, spins rotate at different rates depending on x position. With Phase Gray shading the gray levels track phase.</td></tr>
       <tr><td>A3 x Gradient (2D)</td><td>5×5×1</td><td>The same gradient in 2D: all spins along y at one x location rotate at the same rate.</td></tr>
       <tr><td>A4 y Gradient (2D)</td><td>5×5×1</td><td>A Gy gradient, so the phase variation is now along y.</td></tr>
-      <tr><td>A5 Selective Excitation</td><td>3×1×7</td><td>With a z gradient only on-resonance spins are excited; a refocusing gradient realigns them.</td></tr>
-      <tr><td>A6 Complete</td><td>3×1×7</td><td>End of the basic series — move on to the Full Tour, or the Full View to see the RF and gradient waveforms.</td></tr>
+      <tr><td>A5 Excitation/Relaxation</td><td>1×1×1</td><td>After excitation, transverse magnetization decays with T2 while longitudinal magnetization recovers with T1. Try the lab frame, B1 and trails.</td></tr>
+      <tr><td>A6 Complete</td><td>2×2×2</td><td>End of the basic series — move on to the Full Tour, or the Full View to see the RF and gradient waveforms.</td></tr>
     </table>
 
     <h2>B — Image encoding</h2>
@@ -68,21 +68,21 @@
       <tr><td>B3 5×5 Encoding</td><td>5×5×1</td><td>A real 5×5 imaging sequence, pausing at each of the 25 samples so you can see the spin configuration. A 5×5 FFT would reconstruct the image.</td></tr>
     </table>
 
-    <h2>C — Excitation and RF</h2>
+    <h2>C — Excitation, RF and relaxation</h2>
+    <p>Intuition for selective excitation with RF and gradients, RF phase, relaxation and refocusing.</p>
     <table>
       <tr><th>Example</th><th>Matrix</th><th>What it shows</th></tr>
       <tr><td>C1 Simple Selective Excitation</td><td>3×1×3</td><td>Two 45° tips with a gradient in between: spins at z=0 tip 90° while off-axis spins do not.</td></tr>
       <tr><td>C2 Sinc Excitation</td><td>3×1×7</td><td>A sinc RF pulse excites a clean slice, followed by a refocusing gradient. Try increasing the z matrix.</td></tr>
-      <tr><td>C3 Spin Echo</td><td>3×1×5</td><td>A 90° excitation, repeatable dephasing, then a 180° refocusing pulse that brings the spins back into a spin echo.</td></tr>
-      <tr><td>C4 Inversion</td><td>1×1×1</td><td>A 180° pulse inverts the magnetization; at ~0.7·T1 it passes through zero (the null point used to suppress a tissue).</td></tr>
+      <tr><td>C3 T2 Decay</td><td>2 objects</td><td>After a 90° excitation, two spins with different T2 (10 and 50&nbsp;ms) decay at different rates, shown with Gray |Mxy| shading.</td></tr>
+      <tr><td>C4 Inversion</td><td>2 objects</td><td>A 180° pulse inverts the magnetization; at ~0.7·T1 the shorter-T1 spin passes through zero (the null point used to suppress a tissue), shown with Gray |M| shading.</td></tr>
       <tr><td>C5 RF Phase</td><td>1×1×1</td><td>Five 90° pulses with phases 0°, 90°, 180°, 30° and 60° show how RF phase sets the rotation axis.</td></tr>
+      <tr><td>C6 Spin Echo</td><td>3×1×5</td><td>A 90° excitation, repeatable dephasing, then a 180° refocusing pulse that brings the spins back into a spin echo. Adjust Δf(r)σ in the waveform controls to change the dephasing.</td></tr>
     </table>
 
-    <h2>D — Scaling and contrast</h2>
+    <h2>D — Scaling</h2>
     <table>
       <tr><th>Example</th><th>Matrix</th><th>What it shows</th></tr>
-      <tr><td>D1 Long Inversion</td><td>1×1×1</td><td>T1 contrast following an inversion. Use one of the T1 phantoms, with Gray |M| shading.</td></tr>
-      <tr><td>D2 Long TE</td><td>1×1×1</td><td>T2 contrast at a long echo time. Use one of the T2 phantoms, with Gray |Mxy| shading. Drag the time marker to play through quicker.</td></tr>
       <tr><td>D Scaling</td><td>5×1×5</td><td>A realistic 25&nbsp;cm FOV, 1&nbsp;mm, 1&nbsp;ms readout, 2&nbsp;mm slice sequence scaled by 4/250, so 4 cycles accrue across the FOV and the slice becomes ~120&nbsp;mm.</td></tr>
     </table>
 
@@ -91,7 +91,6 @@
       <div>
         <table>
           <tr><th>Example</th><th>Matrix</th><th>What it shows</th></tr>
-          <tr><td>Gradient Echo</td><td>5×1×5</td><td>Excitation followed by a standard gradient echo.</td></tr>
           <tr><td>EPI</td><td>10×10×1</td><td>A 90° excitation followed by an echo-planar readout; the readout alternates every 2&nbsp;ms and Gy blips step through 10 k-space lines.</td></tr>
           <tr><td>Spiral</td><td>10×10×1</td><td>Gx and Gy oscillate together so k-space is covered by a spiral from the center outward, in one shot.</td></tr>
           <tr><td>CPMG</td><td>5×5×1</td><td>A 90° followed by a train of refocusing pulses (150°, then 120°) every 5&nbsp;ms with Cartesian readouts.</td></tr>
@@ -99,8 +98,8 @@
         </table>
       </div>
       <figure>
-        <img class="shot" src="img/grad-echo.jpg" alt="Full View showing the gradient echo sequence">
-        <figcaption>Gradient echo in the Full View</figcaption>
+        <img class="shot" src="img/d-scaling.jpg" alt="Full View on iPad showing the D Scaling example">
+        <figcaption>D Scaling in the Full View</figcaption>
       </figure>
     </div>
     <p>You can download/modify the examples <a href="downloads/spintuition-examples.tar" download>here</a>.</p>
