@@ -34,21 +34,21 @@
           through a sphere. The matrix is simulated with the Bloch equations, including T1 and T2
           relaxation and off-resonance.</p>
         <p>Use the expand button (↗, top right) to view the spins full screen with additional controls.</p>
+
+        <h2>Navigation</h2>
+        <ul>
+          <li><strong>Drag</strong> to orbit the camera around the matrix.</li>
+          <li><strong>Pinch</strong> to zoom in and out.</li>
+          <li><strong>View buttons</strong> (left side) snap to Oblique, Axial, Sagittal and Coronal views.
+            Optional zoom and rotate animations can be enabled in Settings.</li>
+          <li><strong>Expand / collapse</strong> (top right) toggles the full-screen spins view.</li>
+        </ul>
       </div>
       <figure>
         <img class="shot" src="img/sel-excitation.jpg" alt="Expanded Spins view during selective excitation">
         <figcaption>Selective excitation, expanded Spins view</figcaption>
       </figure>
     </div>
-
-    <h2>Navigation</h2>
-    <ul>
-      <li><strong>Drag</strong> to orbit the camera around the matrix.</li>
-      <li><strong>Pinch</strong> to zoom in and out.</li>
-      <li><strong>View buttons</strong> (left side) snap to Oblique, Axial, Sagittal and Coronal views.
-        Optional zoom and rotate animations can be enabled in Settings.</li>
-      <li><strong>Expand / collapse</strong> (top right) toggles the full-screen spins view.</li>
-    </ul>
 
     <h2>Coordinate system</h2>
     <table>
@@ -64,25 +64,39 @@
     <p>Use the X, Y and Z steppers to add or remove spins (X × Y × Z). Sequences can set the matrix with
       the <code>SimmrMatrixSize</code> <a href="sequences.html#directives">directive</a>.</p>
 
-    <h2>Display options</h2>
+    <h2 id="menu">Spin options menu (•••)</h2>
+    <p>The <strong>•••</strong> button at the top right of the Spins panel opens the spin options:</p>
     <table>
       <tr><th>Option</th><th>Description</th></tr>
-      <tr><td>Vector averages</td><td>Show the global XYZ average vector, or averages along X, Y or Z rows. Optionally average the transverse component only.</td></tr>
-      <tr><td>Fade Unexcited Spin</td><td>Fades spins with little transverse signal (0–25%), so excited spins stand out.</td></tr>
-      <tr><td>Show Trail</td><td>Draws a trail of the arrow tip over the last 0–2&nbsp;ms.</td></tr>
+      <tr><td>Spin Vector Help</td><td>Shows instructions for the Spins view.</td></tr>
+      <tr><td>Lab Frame</td><td>Off: rotating frame (default). On: laboratory frame, where spins also precess at the carrier frequency.</td></tr>
       <tr><td>Show B1</td><td>Shows an orange RF rotation-axis vector while RF is on, normalized to the peak RF amplitude.</td></tr>
-      <tr><td>Lab Frame</td><td>Switch between the rotating frame (default) and the laboratory frame.</td></tr>
-      <tr><td>Spin Sphere Size</td><td>Settings option to change sphere size; set it to 0 to see vector length clearly.</td></tr>
+      <tr><td>Labels</td><td>Shows text labels on the spins. Only appears when the scan subject has labels.</td></tr>
+      <tr><td>Show Trail…</td><td>Draws a trail of each magnetization arrow tip over the last 0–2&nbsp;ms (off by default).</td></tr>
+      <tr><td>Fade Unexcited…</td><td>Fades spins with little transverse signal (0–25%), so excited spins stand out. Advanced mode only.</td></tr>
+      <tr><td>Spin Rendering…</td><td>Chooses how spins are drawn, and their size — see <a href="#shading">below</a>.</td></tr>
     </table>
+    <p><strong>Vector averages:</strong> the average vector controls show the global XYZ average vector, or
+      averages along X, Y or Z rows. Optionally average the transverse component only.</p>
 
-    <h2>Spin shading</h2>
-    <p>Choose in Settings → 3D Visualization:</p>
+    <h2 id="shading">Spin rendering</h2>
+    <p>Choose <strong>Spin Rendering…</strong> in the ••• menu. The first three options show spin direction;
+      the last three show magnitude:</p>
     <ul>
-      <li><strong>Mini Magnets</strong> (default) — white/red hemispheres like small bar magnets; white faces
-        the magnetization direction.</li>
-      <li><strong>Phase Gray</strong> — grayscale by XY phase angle, from black (−180°) to white (+180°).</li>
       <li><strong>Plain</strong> — uniform gray spheres for minimal visual complexity.</li>
+      <li><strong>Mini Magnets</strong> — white/red hemispheres like small bar magnets; white faces
+        the magnetization direction.</li>
+      <li><strong>Phase Gray</strong> (default) — grayscale by XY phase angle, from black (−180°) to white (+180°).</li>
+      <li><strong>Gray |M|</strong> — grayscale by the magnitude of the magnetization, to show T1 contrast.</li>
+      <li><strong>Gray |Mxy|</strong> — grayscale by the transverse (signal) magnitude, to show T2 contrast.</li>
+      <li><strong>|Mxy|phase</strong> — color by XY phase, with brightness set by the transverse magnitude.</li>
     </ul>
+    <p>Below the options, <strong>Sphere Size</strong> sets the sphere diameter from 0 to 70% (default 40%);
+      set it to 0 to see vector length clearly. <strong>Proportional to |m|</strong> scales each sphere with
+      its magnetization magnitude.</p>
+    <figure>
+      <img class="shot narrow" src="img/rendering.png" alt="Spin rendering options: Mini Magnets, Phase Gray, Gray |Mxy| and |Mxy|phase">
+    </figure>
 
     <h2>Video export</h2>
     <p><strong>Export Video</strong> records the simulation through the full waveform duration at 30&nbsp;fps,
